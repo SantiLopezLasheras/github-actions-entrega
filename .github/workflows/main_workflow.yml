@@ -92,7 +92,7 @@ jobs:
       - name: Test artifact download
         run: ls -R
 
-      # Step 4: Instalar dependencias
+      # Step 4: Instalar dependencias necesarias
       - name: Install dependencies
         run: cd ./.github/actions/badges && npm install
 
