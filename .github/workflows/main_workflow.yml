@@ -29,3 +29,89 @@ jobs:
       # Step 4: Linter execution
       - name: Linter execution
         run: npm run lint
+  Cypress_job:
+    runs-on: ubuntu-24.04
+    needs: Linter_job
+    outputs:
+      resultado_cypress: ${{ job.status }}
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Establecer versión de Node
+      - name: Setup node version
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # Step 3: Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Cypress run
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+          config-file: cypress.json
+        continue-on-error: true
+        id: cypress
+
+      # Step 5: Creación del artefacto con el resultado del test
+      - name: Crear artefacto result.txt
+        run: mkdir -p artifacts && echo ${{ steps.cypress.outcome }} > artifacts/result.txt
+
+      # Step 6: Upload del artefacto
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultado-test
+          path: artifacts/result.txt
+  Add_badge_job:
+    runs-on: ubuntu-latest
+    needs: Cypress_job
+    outputs:
+      resultado_badge: ${{ job.status }}
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Obtener artefacto del job anterior
+      - name: Descargar artefacto result.txt
+        uses: actions/download-artifact@v4
+        with:
+          name: resultado-test
+
+      # Step 3: Test descarga del artefacto
+      - name: Test artifact download
+        run: ls -R
+
+      # Step 4: Instalar dependencias
+      - name: Install dependencies
+        run: cd ./.github/actions/badges && npm install
+
+      # Step 5: Leer el contenido del artefacto
+      - name: Leer artefacto
+        id: resultado_artefacto
+        run: echo "::set-output name=resultado::$resultado"
+
+      # Step 6: Generar output
+      - name: Generar output
+        uses: ./.github/actions/badges
+        with:
+          resultado: ${{ steps.resultado_artefacto.outputs.resultado }}
+
+      # Step 7: Commit and Push Changes
+      - name: Commit and Push Changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "."
+          author_name: "Santi"
+          message: "Actualizado el README file"
+          push: true
+          token: ${{ secrets.TOKEN }}
