@@ -275,3 +275,6 @@ He añadido un secreto llamado metrics para dar acceso a la action a las estadí
 Al final el perfil tiene la siguiente apariencia:
 
 <img src="/assets/images/image39.png" width="500" />
+
+Link al proyecto desplegado en Vercel:
+https://nodejs-blog-practica-main-five.vercel.app/
