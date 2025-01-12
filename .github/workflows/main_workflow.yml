@@ -93,7 +93,7 @@ jobs:
 
       # Step 3: Test descarga del artefacto
       - name: Test artifact download
-        run: ls -l
+        run: ls -l artifacts/
 
       # Step 4: Instalar dependencias necesarias
       - name: Install dependencies

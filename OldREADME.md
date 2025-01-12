@@ -278,4 +278,4 @@ Al final el perfil tiene la siguiente apariencia:
 <img src="/assets/images/image39.png" width="500" />
 
 Link al proyecto desplegado en Vercel:
-https://nodejs-blog-practica-main-five.vercel.app/
+https://entrega-santiago-lopez-lasheras-projects.vercel.app/
