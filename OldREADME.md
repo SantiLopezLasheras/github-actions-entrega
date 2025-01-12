@@ -157,6 +157,7 @@ Para los tests, vamos a utilizar Cypress, que correrá también en Ubuntu e indi
   - Step 3: Instalación de dependencias necesarias mediante el comando npm install
 
   <img src="/assets/images/image17.png" width="500" />
+
   - Step 4: Ejecución de los tests de Cypress utilizando la action cypress-io/github-action@v6, para lo que primero haremos un build (npm run build) y arrancaremos el proyecto (npm start) para que se puedan realizar los tests.
     En caso de error en este job, indicamos a GitHub que continue al siguiente job mediante continue-on-error.
   - Step 5: Creación de un artefacto con los resultados de los test, para lo cual creamos una carpeta primero (mkdir -p artifacts) y después guardamos el resultado en un archivo texto result.txt con el comando echo
@@ -180,6 +181,7 @@ También necesitará que termine el job anterior (needs: Cypress_job) y correrá
   - Step 4: Instalación de dependencias necesarias mediante el comando npm install
 
   <img src="/assets/images/image20.png" width="500" />
+
   - Step 4: Leer el contenido del artefacto con el comando run: echo "::set-output name=resultado::$resultado"
   - Step 5: Generación del output con una custom action que hemos creado y que se encuentra en la carpeta ./.github/actions/badges (uses: ./.github/actions/badges) a la cual le pasamos el resultado del artefacto que hemos leído en el step anterior (resultado: ${{ steps.resultado_artefacto.outputs.resultado }})
   - Step 6: Commit and Push Changes para actualizar el README.md del repositorio con la badge creada
@@ -220,6 +222,7 @@ Esto lo guardaremos junto al token personal de GitHub y el token de Vercel en lo
   - Step 2: Creación del build a desplegar en Vercel mediante el comando npm install && npm run build
 
   <img src="/assets/images/image28.png" width="500" />
+
   - Step 3: Deploy Vercel - utilizamos la action de amondnet/vercel-action@v20 para desplegar la aplicación en Vercel. Para ellos tenemos que configurar el repositorio y linkearlo con Vercel, para lo cual guardaremos los tokens necesarios en los secrets del repositorio
 
   <img src="/assets/images/image29.png" width="500" />
