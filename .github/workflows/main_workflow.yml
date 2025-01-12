@@ -103,7 +103,7 @@ jobs:
       - name: Leer artefacto
         id: resultado_artefacto
         run: |
-          resultado=$(cat artifacts/result.txt)
+          resultado=$(cat result.txt)
           echo "::set-output name=resultado::$resultado"
 
       # Step 6: Generar output
