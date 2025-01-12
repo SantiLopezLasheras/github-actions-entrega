@@ -206,10 +206,23 @@ También necesitará que termine el job anterior (needs: Cypress_job) y correrá
 
 Finalmente, vamos a desplegar el proyecto en Vercel.
 
+Primero tenemos que enlazar nuestro proyecto de Vercel mediante el CLI de Vercel, que nos crea una carpeta .vercel en el proyecto con el ORG_ID y el PROJECT_ID.
+
+<img src="/assets/images/image26.png" width="500" />
+
+Esto lo guardaremos junto al token personal de GitHub y el token de Vercel en los secrets del repositorio.
+
+<img src="/assets/images/image27.png" width="500" />
+
 - Cuenta con los siguientes steps:
+
   - Step 1: Checkout code - revisa el código del repositorio
   - Step 2: Creación del build a desplegar en Vercel mediante el comando npm install && npm run build
+
+  <img src="/assets/images/image28.png" width="500" />
   - Step 3: Deploy Vercel - utilizamos la action de amondnet/vercel-action@v20 para desplegar la aplicación en Vercel. Para ellos tenemos que configurar el repositorio y linkearlo con Vercel, para lo cual guardaremos los tokens necesarios en los secrets del repositorio
+
+  <img src="/assets/images/image29.png" width="500" />
 
 ## Notification_job
 
