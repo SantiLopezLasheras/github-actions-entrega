@@ -255,6 +255,10 @@ Y luego envía el mesanje por Telegram:
 
 <img src="/assets/images/image34.png" width="500" />
 
+A Telegram nos llega un mensaje con el resultado de los jobs:
+
+<img src="/assets/images/image41.png" width="500" />
+
 ## Personalización del repositorio con nuestro nombre para incluir estadísticas
 
 Para personalizar el repositorio personal de GitHub he creado un repositorio con el mismo nombre de usuario.
