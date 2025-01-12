@@ -80,6 +80,9 @@ jobs:
     needs: Cypress_job
     continue-on-error: true
 
+    permissions:
+      contents: write
+
     outputs:
       resultado_badge: ${{ job.status }}
 
@@ -123,7 +126,6 @@ jobs:
           author_name: "Santi"
           message: "Actualizado el README file"
           push: true
-          token: ${{ secrets.TOKEN }}
 
   Deploy_job:
     outputs:
