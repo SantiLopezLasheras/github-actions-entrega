@@ -250,4 +250,25 @@ El fichero de JavaScript que realiza la action primero recupera las variables ne
 Y luego envía el mesanje por Telegram:
 
 <img src="/assets/images/image34.png" width="500" />
+
 ## Personalización del repositorio con nuestro nombre para incluir estadísticas
+
+Para personalizar el repositorio personal de GitHub he creado un repositorio con el mismo nombre de usuario.
+
+<img src="/assets/images/image35.png" width="500" />
+
+Después he creado un archivo .yml que se ejecute al hacer push:
+
+<img src="/assets/images/image36.png" width="500" />
+
+He utilizado la action lowlighter/metrics@latest:
+
+<img src="/assets/images/image37.png" width="500" />
+
+He añadido un secreto llamado metrics para dar acceso a la action a las estadísticas:
+
+<img src="/assets/images/image38.png" width="500" />
+
+Al final el perfil tiene la siguiente apariencia:
+
+<img src="/assets/images/image39.png" width="500" />
