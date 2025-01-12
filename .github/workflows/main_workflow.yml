@@ -99,7 +99,9 @@ jobs:
       # Step 5: Leer el contenido del artefacto
       - name: Leer artefacto
         id: resultado_artefacto
-        run: echo "::set-output name=resultado::$resultado"
+        run: |
+          resultado=$(cat artifacts/result.txt)
+          echo "::set-output name=resultado::$resultado"
 
       # Step 6: Generar output
       - name: Generar output
