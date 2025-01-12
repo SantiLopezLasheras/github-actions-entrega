@@ -165,6 +165,9 @@ Para los tests, vamos a utilizar Cypress, que correrá también en Ubuntu e indi
 
   <img src="/assets/images/image18.png" width="500" />
 
+  Al pasar los tests de cypress, en GitHub Actions veremos el siguiente mensaje:
+  <img src="/assets/images/image40.png" width="500" />
+
 ## Add_badge_job
 
 En este paso, queremos publicar en el README.md del proyecto una badge que dependerá del resultado del test del paso anterior (success o failure).
