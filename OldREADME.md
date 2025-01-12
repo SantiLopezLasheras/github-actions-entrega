@@ -128,7 +128,11 @@ La configuración del Linter_job es la siguiente:
 
 Hacemos commit de los cambios hasta ahora.
 
+<img src="/assets/images/image11.png" width="500" />
+
 En este paso, el linter nos lanza varios errores, que tendremos que corregir.
+
+<img src="/assets/images/image12.png" width="500" />
 
 Una vez corregidos los errores, hacemos commit y push al repositorio, y vemos que el linter ya no nos da más errores y continúa al siguiente job
 
