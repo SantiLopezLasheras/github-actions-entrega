@@ -60,12 +60,12 @@ jobs:
         continue-on-error: true
         id: cypress
 
-      - name: Verificar la creación del artefacto
-        run: ls -l artifacts/
-
       # Step 5: Creación del artefacto con el resultado del test
       - name: Crear artefacto result.txt
         run: mkdir -p artifacts && echo ${{ steps.cypress.outcome }} > artifacts/result.txt
+
+      - name: Verificar la creación del artefacto
+        run: ls -l artifacts/
 
       # Step 6: Upload del artefacto
       - name: Upload artifact
@@ -143,7 +143,8 @@ jobs:
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: "--prod"
+          # github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID }}
           vercel-project-id: ${{ secrets.PROJECT_ID }}
   Send_message:
