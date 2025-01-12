@@ -1,5 +1,3 @@
-<img src="https://img.shields.io/badge/test-failure-red" />
-
 # Introducción teórica
 
 En esta práctica vamos a trabajar con GitHub Actions. Antes de empezar, tenemos que conocer qué engloban las siglas CI/CD.

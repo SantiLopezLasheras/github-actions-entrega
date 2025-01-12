@@ -60,6 +60,9 @@ jobs:
         continue-on-error: true
         id: cypress
 
+      - name: Verificar la creación del artefacto
+        run: ls -l artifacts/
+
       # Step 5: Creación del artefacto con el resultado del test
       - name: Crear artefacto result.txt
         run: mkdir -p artifacts && echo ${{ steps.cypress.outcome }} > artifacts/result.txt
@@ -90,7 +93,7 @@ jobs:
 
       # Step 3: Test descarga del artefacto
       - name: Test artifact download
-        run: ls -R
+        run: ls -l
 
       # Step 4: Instalar dependencias necesarias
       - name: Install dependencies
