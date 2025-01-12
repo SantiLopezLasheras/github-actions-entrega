@@ -134,20 +134,35 @@ En este paso, el linter nos lanza varios errores, que tendremos que corregir.
 
 <img src="/assets/images/image12.png" width="500" />
 
-Una vez corregidos los errores, hacemos commit y push al repositorio, y vemos que el linter ya no nos da más errores y continúa al siguiente job
+Una vez corregidos los errores, hacemos commit y push al repositorio.
+
+<img src="/assets/images/image13.png" width="500" />
+
+Vemos que el linter ya no nos da más errores y el workflow termina con éxito.
+
+<img src="/assets/images/image14.png" width="500" />
+
+<img src="/assets/images/image15.png" width="500" />
 
 ## Cypress_job
 
 Para los tests, vamos a utilizar Cypress, que correrá también en Ubuntu e indicaremos que necesita que termine el job anterior antes de ejecutarse mediante la keyword needs.
 
+<img src="/assets/images/image16.png" width="500" />
+
 - Cuenta con los siguientes steps:
+
   - Step 1: Checkout code - revisa el código del repositorio
   - Step 2: Setup node version - utiliza la action actions/setup-node@v3 para establece la versión de Nodejs 20
   - Step 3: Instalación de dependencias necesarias mediante el comando npm install
+
+  <img src="/assets/images/image17.png" width="500" />
   - Step 4: Ejecución de los tests de Cypress utilizando la action cypress-io/github-action@v6, para lo que primero haremos un build (npm run build) y arrancaremos el proyecto (npm start) para que se puedan realizar los tests.
     En caso de error en este job, indicamos a GitHub que continue al siguiente job mediante continue-on-error.
   - Step 5: Creación de un artefacto con los resultados de los test, para lo cual creamos una carpeta primero (mkdir -p artifacts) y después guardamos el resultado en un archivo texto result.txt con el comando echo
   - Step 6: Upload del artefacto - subimor el artefacto creado para poder descargarlo en próximo job. Utilizamos la action actions/upload-artifact@v4
+
+  <img src="/assets/images/image18.png" width="500" />
 
 ## Add_badge_job
 
@@ -155,18 +170,37 @@ En este paso, queremos publicar en el README.md del proyecto una badge que depen
 
 También necesitará que termine el job anterior (needs: Cypress_job) y correrá en Ubuntu (runs-on: ubuntu-latest).
 
+<img src="/assets/images/image19.png" width="500" />
+
 - Cuenta con los siguientes steps:
 
   - Step 1: Checkout code - revisa el código del repositorio
   - Step 2: Obtención del artefacto del Cypress_job con el resultado del test - utiliza la action actions/download-artifact@v4 para descargarse el artefacto
-  - Step 3: Instalación de dependencias necesarias mediante el comando npm install
+  - Step 3: Probamos que se haya descargado el artifact listando los archivos
+  - Step 4: Instalación de dependencias necesarias mediante el comando npm install
+
+  <img src="/assets/images/image20.png" width="500" />
   - Step 4: Leer el contenido del artefacto con el comando run: echo "::set-output name=resultado::$resultado"
   - Step 5: Generación del output con una custom action que hemos creado y que se encuentra en la carpeta ./.github/actions/badges (uses: ./.github/actions/badges) a la cual le pasamos el resultado del artefacto que hemos leído en el step anterior (resultado: ${{ steps.resultado_artefacto.outputs.resultado }})
   - Step 6: Commit and Push Changes para actualizar el README.md del repositorio con la badge creada
 
+  <img src="/assets/images/image21.png" width="500" />
+
+  He creado una carpeta badges para albergar el código de la action.yml y del index.js
+
+  <img src="/assets/images/image22.png" width="500" />
+
   El contenido de la custom action es el siguiente:
 
+  <img src="/assets/images/image23.png" width="500" />
+
   Y utiliza un archivo de JavaScript con el siguiente código:
+
+  <img src="/assets/images/image24.png" width="500" />
+
+  Para que el código del JavaScript funcione, he creado un archivo OldREADME.md en la raíz del proyecto.
+
+  <img src="/assets/images/image25.png" width="500" />
 
 ## Deploy_Job
 

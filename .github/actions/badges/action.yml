@@ -1,0 +1,12 @@
+name: "Custom Action"
+
+description: "Añadir Badge al README dependiendo del resultado del test"
+
+inputs:
+  resultado:
+    description: "Resultado de los tests"
+    required: true
+
+runs:
+  using: "node20"
+  main: "src/index.js"
