@@ -232,10 +232,22 @@ Los steps son los siguientes:
 
 - Checkout del código mediante la action actions/checkout@v4
 - Instalación de dependencias necesarias con npm install (donde se instalará la api del bot de telegram)
+
+<img src="/assets/images/image30.png" width="500" />
+
 - Enviar el mensaje a Telegram usando una custom action que he guardado en la carpeta ./.github/actions/telegram y a la que le paso las variables que contienen los resultados de los jobs anteriores, y otros parámetros necesarios como el token de telegram y el ID del usuario de telegram
 
-La custom action:
+<img src="/assets/images/image31.png" width="500" />
 
-El fichero JavaScript:
+He creado una carpeta telegram con una custom action.yml con el siguiente código:
 
+<img src="/assets/images/image32.png" width="500" />
+
+El fichero de JavaScript que realiza la action primero recupera las variables necesarias:
+
+<img src="/assets/images/image33.png" width="500" />
+
+Y luego envía el mesanje por Telegram:
+
+<img src="/assets/images/image34.png" width="500" />
 ## Personalización del repositorio con nuestro nombre para incluir estadísticas

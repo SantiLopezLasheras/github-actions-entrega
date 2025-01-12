@@ -110,8 +110,55 @@ jobs:
       - name: Commit and Push Changes
         uses: EndBug/add-and-commit@v9
         with:
-          add: "."
+          add: "README.md"
           author_name: "Santi"
           message: "Actualizado el README file"
           push: true
           token: ${{ secrets.TOKEN }}
+  Deploy_job:
+    runs-on: ubuntu-latest
+    needs: Add_badge_job
+    continue-on-error: true
+
+    outputs:
+      resultado_deploy: ${{ job.status }}
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Crear build
+      - name: Crear Build
+        run: npm install && npm run build
+
+      # Step 3: Despliegue en Vercel
+      - name: Deploy Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+  Send_message:
+    runs-on: ubuntu-latest
+    needs: Deploy_job
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Instalar dependencias
+      - name: Instalar dependencias
+        run: cd ./.github/actions/telegram && npm install
+
+      # Step 3: Enviar mensaje de Telegram
+      - name: Enviar Telegram
+        uses: ./.github/actions/telegram
+        with:
+          telegram_token: ${{ secrets.TELEGRAM_TOKEN}}
+          telegram_id_user: ${{ secrets.TELEGRAM_ID_TOKEN }}
+          resultado_linter: ${{ needs.Linter_job.outputs.resultado_linter }}
+          resultado_cypress: ${{ needs.Cypress_job.outputs.resultado_cypress }}
+          resultado_badge: ${{ needs.Add_badge_job.outputs.resultado_badge }}
+          resultado_deploy: ${{ needs.Deploy_job.outputs.resultado_deploy}}
