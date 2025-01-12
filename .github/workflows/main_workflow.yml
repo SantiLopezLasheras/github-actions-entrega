@@ -1,0 +1,31 @@
+name: main_workflow
+# se ejecutará al hacer push en la rama main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # ejecución del Linter_job para comprobar la sintaxis del código
+  Linter_job:
+    runs-on: ubuntu-latest
+    outputs:
+      resultado_linter: ${{ job.status }}
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Establecer versión de Node
+      - name: Setup node version
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # Step 3: Instalación de dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Linter execution
+      - name: Linter execution
+        run: npm run lint
