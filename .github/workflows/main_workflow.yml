@@ -10,8 +10,6 @@ jobs:
   Linter_job:
     runs-on: ubuntu-latest
 
-    outputs:
-      resultado_linter: ${{ job.status }}
     steps:
       # Step 1: Checkout code
       - name: Checkout code
@@ -30,12 +28,12 @@ jobs:
       # Step 4: Linter execution
       - name: Linter execution
         run: npm run lint
+
+    outputs:
+      resultado_linter: ${{ job.status }}
   Cypress_job:
     runs-on: ubuntu-24.04
     needs: Linter_job
-
-    outputs:
-      resultado_cypress: ${{ job.status }}
 
     steps:
       # Step 1: Checkout code
@@ -72,13 +70,12 @@ jobs:
         with:
           name: resultado-test
           path: result.txt
+    outputs:
+      resultado_cypress: ${{ job.status }}
   Add_badge_job:
     runs-on: ubuntu-latest
     needs: Cypress_job
     continue-on-error: true
-
-    outputs:
-      resultado_badge: ${{ job.status }}
 
     steps:
       # Step 1: Checkout code
@@ -121,6 +118,8 @@ jobs:
           message: "Actualizado el README file"
           push: true
           token: ${{ secrets.TOKEN }}
+    outputs:
+      resultado_badge: ${{ job.status }}
   Deploy_job:
     runs-on: ubuntu-latest
     needs: Add_badge_job
