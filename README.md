@@ -1,5 +1,5 @@
 <img src="https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg" />
-# Introducción teórica
+ # Introducción teórica
 
 En esta práctica vamos a trabajar con GitHub Actions. Antes de empezar, tenemos que conocer qué engloban las siglas CI/CD.
 
