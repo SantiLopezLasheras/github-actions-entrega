@@ -260,6 +260,12 @@ A Telegram nos llega un mensaje con el resultado de los jobs:
 
 <img src="/assets/images/image41.png" width="500" />
 
+### Resultado de todos los jobs funcionando
+
+Una vez se ejecuta el workflow con todos los jobs correctamente, se ve así en GitHub:
+
+<img src="/assets/images/image42.png" width="500" />
+
 ## Personalización del repositorio con nuestro nombre para incluir estadísticas
 
 Para personalizar el repositorio personal de GitHub he creado un repositorio con el mismo nombre de usuario.
